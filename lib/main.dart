@@ -55,10 +55,16 @@ class MyHomePage extends StatelessWidget {
             ),
             ExpansionTile(
               leading: const Icon(Icons.settings),
-              title: const Text('改成加密类型'),
+              title: const Text('RSA'),
               children: <Widget>[
                 ListTile(
-                  title: const Text('题目名字1'),
+                  title: const Text('RSA基础'),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  title: const Text('直接分解'),
                   onTap: () {
                     Navigator.push(
                         context,
@@ -68,7 +74,7 @@ class MyHomePage extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: const Text('题目名字1'),
+                  title: const Text('共享素数'),
                   onTap: () {
                     Navigator.pop(context);
                   },
@@ -86,8 +92,19 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
-      body: const Center(
-        child: Text('主页面内容'),
+      body: const Align(
+        alignment: Alignment.topLeft,  // 将文本对齐到左上角
+        child: Padding(
+          padding: EdgeInsets.all(16.0),  // 添加16像素的内边距，避免紧贴边缘
+          child: Text(
+            '主页面内容',  // 大标题
+            style: TextStyle(
+              fontSize: 32,       // 字体大小
+              fontWeight: FontWeight.bold,  // 粗体
+              color: Colors.black, // 黑色文字
+            ),
+          ),
+        ),
       ),
     );
   }
