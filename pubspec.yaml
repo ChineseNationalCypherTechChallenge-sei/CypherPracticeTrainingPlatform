@@ -10,8 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_highlight: ^0.7.0
-  syntax_highlighter: ^1.0.0
-
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
