@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_math_fork/flutter_math.dart'; // 导入 flutter_math_fork
 import 'dart:io'; // 导入 dart:io 库以使用 Process
 
 class NewPage extends StatefulWidget {
@@ -11,6 +14,21 @@ class NewPage extends StatefulWidget {
 class _NewPageState extends State<NewPage> {
   final TextEditingController _controller = TextEditingController();
   String _output = ''; // 存储输出结果
+  String markdownSource = '';
+
+  @override
+  void initState() {
+    super.initState();
+    loadMarkdownFile();
+  }
+
+  // 加载 Markdown 文件
+  Future<void> loadMarkdownFile() async {
+    final String data = await rootBundle.loadString('assets/README.md');
+    setState(() {
+      markdownSource = data;
+    });
+  }
 
   // 执行用户输入的 Python 代码
   void _runCode() async {
@@ -30,7 +48,7 @@ class _NewPageState extends State<NewPage> {
 
       setState(() {
         _output = result.stdout.trim();
-        if(_output == RealAnswer){
+        if (_output == RealAnswer) {
           _output = "Pass";
         } else {
           _output = "Failed";
@@ -62,20 +80,26 @@ class _NewPageState extends State<NewPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const Text(
-                      'N =	1867596509:',
-                      style: TextStyle(fontSize: 24, color: Colors.black),
+                    Expanded(
+                      child: Markdown(
+                        data: markdownSource,
+                        selectable: true,
+                        builders: {
+                          'inlineMath': MathBuilder(), // 内联公式处理
+                          'blockMath': MathBuilder(), // 块级公式处理
+                        },
+                      ),
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: const Text('返回'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
                         iconColor: Colors.white,
                       ),
+                      child: const Text('返回'),
                     ),
                   ],
                 ),
@@ -120,14 +144,13 @@ class _NewPageState extends State<NewPage> {
                           ),
                           ElevatedButton(
                             onPressed: _runCode,
-                            child: const Text('提交'), // 添加 child 参数
+                            child: const Text('提交'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,
                               iconColor: Colors.white,
                             ),
                           ),
                           const SizedBox(height: 10),
-                          // 显示输出结果
                           Expanded(
                             child: SingleChildScrollView(
                               child: Text(
@@ -150,8 +173,16 @@ class _NewPageState extends State<NewPage> {
   }
 }
 
+// 自定义 MathBuilder 来渲染数学公式
+class MathBuilder extends MarkdownElementBuilder {
+  @override
+  Widget visitText(text, TextStyle? preferredStyle) {
+    return Math.tex(text.text, textStyle: preferredStyle);
+  }
+}
+
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: NewPage(),
   ));
 }
