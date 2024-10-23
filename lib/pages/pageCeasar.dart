@@ -27,7 +27,7 @@ class _NewPageState extends State<pageCeasar> {
 
       setState(() {
         _output = result.stdout.trim();
-        if(_output == RealAnswer){
+        if (_output == RealAnswer) {
           _output = "Pass";
         } else {
           _output = "Failed";
@@ -46,7 +46,7 @@ class _NewPageState extends State<pageCeasar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('新页面'),
+        title: const Text('Ceasar'),
         backgroundColor: Colors.white,
       ),
       body: Container(
@@ -62,7 +62,7 @@ class _NewPageState extends State<pageCeasar> {
                     Text(
                       '凯撒加密',
                       style: TextStyle(
-                        fontSize: 32, 
+                        fontSize: 32,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
@@ -79,7 +79,6 @@ class _NewPageState extends State<pageCeasar> {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      
                       '尝试还原如下句子:\nWkh txlfn eurzq ira mxpsv ryhu wkh odcb grj\n并输出',
                       style: TextStyle(fontSize: 16, color: Colors.black),
                     ),

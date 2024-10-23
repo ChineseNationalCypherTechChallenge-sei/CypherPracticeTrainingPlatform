@@ -64,7 +64,7 @@ class _NewPageState extends State<NewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('新页面'),
+        title: const Text('RSA'),
         backgroundColor: Colors.white,
       ),
       body: Container(
@@ -80,11 +80,10 @@ class _NewPageState extends State<NewPage> {
                     Text(
                       'RSA算法',
                       style: TextStyle(
-                        fontSize: 32, 
+                        fontSize: 32,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
-                      child: const Text('返回'),
                     ),
                     SizedBox(height: 10),
                     Text(
@@ -93,12 +92,12 @@ class _NewPageState extends State<NewPage> {
                     ),
                     SizedBox(height: 10),
                     Text(
-                    'RSA的基本过程：\n'
-                    '1. 选择两个大质数 p 和 q。\n'
-                    '2. 计算它们的乘积 n = p × q，这是模数。\n'
-                    '3. 选择一个加密指数 e（通常是 65537）。\n'
-                    '4. 通过数学方法计算私钥 d，使得 e 和 d 互为逆。\n',
-                    style: TextStyle(fontSize: 18),
+                      'RSA的基本过程：\n'
+                      '1. 选择两个大质数 p 和 q。\n'
+                      '2. 计算它们的乘积 n = p × q，这是模数。\n'
+                      '3. 选择一个加密指数 e（通常是 65537）。\n'
+                      '4. 通过数学方法计算私钥 d，使得 e 和 d 互为逆。\n',
+                      style: TextStyle(fontSize: 18),
                     ),
                     Text(
                       'RSA的加密和解密公式：\n'

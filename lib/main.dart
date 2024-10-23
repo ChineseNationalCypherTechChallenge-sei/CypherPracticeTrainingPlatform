@@ -13,7 +13,7 @@ class CypherPracticeTrainingPlatform extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: '密码技术实训平台(demo)',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -90,14 +90,6 @@ class MyHomePage extends StatelessWidget {
                 ),
               ],
             ),
-            /* ListTile(
-              leading: const Icon(Icons.info),
-              title: const Text('关于'),
-              onTap: () {
-                // 跳转到关于页面
-                Navigator.pop(context);
-              },
-            ), */
           ],
         ),
       ),
