@@ -1,38 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:flutter_math_fork/flutter_math.dart';
 import 'dart:io';
 
-class NewPage extends StatefulWidget {
-  const NewPage({super.key});
+class pageRc4 extends StatefulWidget {
+  const pageRc4({super.key});
 
   @override
   _NewPageState createState() => _NewPageState();
 }
 
-class _NewPageState extends State<NewPage> {
+class _NewPageState extends State<pageRc4> {
   final TextEditingController _controller = TextEditingController();
-  String _output = ''; // 存储输出结果
-  String markdownSource = '';
-
-  @override
-  void initState() {
-    super.initState();
-    loadMarkdownFile();
-  }
-
-  // 加载 Markdown 文件
-  Future<void> loadMarkdownFile() async {
-    final String data = await rootBundle.loadString('assets/README.md');
-    setState(() {
-      markdownSource = data;
-    });
-  }
+  String _output = '';
 
   void _runCode() async {
     String code = _controller.text;
-    String RealAnswer = "3112";
+    String RealAnswer = "HELLO";
 
     File tempFile = File('temp_code.py');
     await tempFile.writeAsString(code);
@@ -45,7 +27,7 @@ class _NewPageState extends State<NewPage> {
 
       setState(() {
         _output = result.stdout.trim();
-        if (_output == RealAnswer) {
+        if(_output == RealAnswer){
           _output = "Pass";
         } else {
           _output = "Failed";
@@ -78,38 +60,48 @@ class _NewPageState extends State<NewPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'RSA算法',
+                      'Rc4算法',
                       style: TextStyle(
                         fontSize: 32, 
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
-                      child: const Text('返回'),
                     ),
                     SizedBox(height: 10),
-                    Text(
-                      'RSA（Rivest-Shamir-Adleman）是一种非对称加密算法，广泛用于安全数据传输。它依赖于两个密钥：公钥和私钥。公钥用于加密数据，而私钥用于解密。非对称的特点在于，即使拥有公钥的人也无法解密数据，只有私钥持有者可以解密。\nRSA的安全性基于大数因数分解的数学难题，即将两个大质数的乘积分解为原始质数非常困难，因此即使攻击者获得公钥，也很难通过公钥反推出私钥',
-                      style: TextStyle(fontSize: 16, color: Colors.black),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                    'RSA的基本过程：\n'
-                    '1. 选择两个大质数 p 和 q。\n'
-                    '2. 计算它们的乘积 n = p × q，这是模数。\n'
-                    '3. 选择一个加密指数 e（通常是 65537）。\n'
-                    '4. 通过数学方法计算私钥 d，使得 e 和 d 互为逆。\n',
-                    style: TextStyle(fontSize: 18),
-                    ),
-                    Text(
-                      'RSA的加密和解密公式：\n'
-                      '加密：C = M^e mod n （M 是消息，C 是密文）\n'
-                      '解密：M = C^d mod n （C 是密文，M 是原始消息）\n',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    Text(
-                      '请将下面这个N分解，并输出其分解结果p与q的异或（p^q），以十进制数输出\nN = 10101203027',
-                      style: TextStyle(fontSize: 18),
-                    ),
+                    const Text(
+                'RC4 是一种流加密算法，广泛应用于各种加密协议。其主要加密过程如下：',
+                style: TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                '初始化 S-box：\n'
+                '  生成一个长度为 256 的 S-box，其中每个元素的值为 0 到 255。即 S[i] = i。\n'
+                '  使用密钥对 S-box 进行初步打乱。通过遍历 S-box，将其与密钥的各个字节进行混合。',
+                style: TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                '生成密钥流：\n'
+                '  继续通过对 S-box 的打乱生成伪随机字节流。\n'
+                '  在每一步中，生成一个新的字节，作为伪随机密钥流中的一个字节。',
+                style: TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                '加密过程：\n'
+                '  将生成的密钥流字节与明文中的每一个字节进行异或，得到加密后的密文。',
+                style: TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                '还原并输出Rc4加密的如下字符串：',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const Text(
+                '密文: [45, 139, 35, 110, 21]\n'
+                '密钥: [101, 202, 111, 34, 90]\n',
+                style: TextStyle(fontSize: 16),
+              ),
                     SizedBox(height: 10),
                   ],
                 ),
@@ -183,16 +175,8 @@ class _NewPageState extends State<NewPage> {
   }
 }
 
-// 自定义 MathBuilder 来渲染数学公式
-class MathBuilder extends MarkdownElementBuilder {
-  @override
-  Widget visitText(text, TextStyle? preferredStyle) {
-    return Math.tex(text.text, textStyle: preferredStyle);
-  }
-}
-
 void main() {
-  runApp(const MaterialApp(
-    home: NewPage(),
+  runApp(MaterialApp(
+    home: pageRc4(),
   ));
 }
