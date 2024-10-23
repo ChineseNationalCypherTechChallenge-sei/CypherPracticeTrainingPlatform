@@ -1,4 +1,6 @@
 import 'package:cypherpracticetrainingplatform/pages/newPage.dart';
+import 'package:cypherpracticetrainingplatform/pages/pageRc4.dart';
+import 'package:cypherpracticetrainingplatform/pages/pageCeasar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,7 +29,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('二级侧边栏示例'),
+        title: const Text('密码技术实训平台(demo)'),
       ),
       drawer: Drawer(
         child: ListView(
@@ -49,22 +51,25 @@ class MyHomePage extends StatelessWidget {
               leading: const Icon(Icons.home),
               title: const Text('主页'),
               onTap: () {
-                // 跳转到主页逻辑
                 Navigator.pop(context);
               },
             ),
             ExpansionTile(
               leading: const Icon(Icons.settings),
-              title: const Text('RSA'),
+              title: const Text('一览'),
               children: <Widget>[
                 ListTile(
-                  title: const Text('RSA基础'),
+                  title: const Text('凯撒加密'),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const pageCeasar(),
+                        ));
                   },
                 ),
                 ListTile(
-                  title: const Text('直接分解'),
+                  title: const Text('RSA'),
                   onTap: () {
                     Navigator.push(
                         context,
@@ -74,35 +79,57 @@ class MyHomePage extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: const Text('共享素数'),
+                  title: const Text('rc4'),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const pageRc4(),
+                        ));
                   },
                 ),
               ],
             ),
-            ListTile(
+            /* ListTile(
               leading: const Icon(Icons.info),
               title: const Text('关于'),
               onTap: () {
                 // 跳转到关于页面
                 Navigator.pop(context);
               },
-            ),
+            ), */
           ],
         ),
       ),
       body: const Align(
-        alignment: Alignment.topLeft,  // 将文本对齐到左上角
+        alignment: Alignment.topLeft,
         child: Padding(
-          padding: EdgeInsets.all(16.0),  // 添加16像素的内边距，避免紧贴边缘
-          child: Text(
-            '主页面内容',  // 大标题
-            style: TextStyle(
-              fontSize: 32,       // 字体大小
-              fontWeight: FontWeight.bold,  // 粗体
-              color: Colors.black, // 黑色文字
-            ),
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                '主页',
+                style: TextStyle(
+                  fontSize: 32, // 字体大小
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 10),
+              Divider(
+                color: Colors.grey,
+                thickness: 2,
+              ),
+              SizedBox(height: 20),
+              Text(
+                '这是密码技术实训平台的演示版本，主要是基于flutter编写的桌面/Android应用\n我们主要以OJ的形式呈现该平台，并以各种密码的攻击方案作为示例', // 需要添加的文本
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black87,
+                ),
+              ),
+            ],
           ),
         ),
       ),
