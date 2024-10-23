@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_math_fork/flutter_math.dart';
 import 'dart:io';
 
 class NewPage extends StatefulWidget {
@@ -10,7 +13,22 @@ class NewPage extends StatefulWidget {
 
 class _NewPageState extends State<NewPage> {
   final TextEditingController _controller = TextEditingController();
-  String _output = '';
+  String _output = ''; // 存储输出结果
+  String markdownSource = '';
+
+  @override
+  void initState() {
+    super.initState();
+    loadMarkdownFile();
+  }
+
+  // 加载 Markdown 文件
+  Future<void> loadMarkdownFile() async {
+    final String data = await rootBundle.loadString('assets/README.md');
+    setState(() {
+      markdownSource = data;
+    });
+  }
 
   void _runCode() async {
     String code = _controller.text;
@@ -27,7 +45,7 @@ class _NewPageState extends State<NewPage> {
 
       setState(() {
         _output = result.stdout.trim();
-        if(_output == RealAnswer){
+        if (_output == RealAnswer) {
           _output = "Pass";
         } else {
           _output = "Failed";
@@ -66,6 +84,7 @@ class _NewPageState extends State<NewPage> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
+                      child: const Text('返回'),
                     ),
                     SizedBox(height: 10),
                     Text(
@@ -164,8 +183,16 @@ class _NewPageState extends State<NewPage> {
   }
 }
 
+// 自定义 MathBuilder 来渲染数学公式
+class MathBuilder extends MarkdownElementBuilder {
+  @override
+  Widget visitText(text, TextStyle? preferredStyle) {
+    return Math.tex(text.text, textStyle: preferredStyle);
+  }
+}
+
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: NewPage(),
   ));
 }
