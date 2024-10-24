@@ -125,11 +125,11 @@ class _NewPageState extends State<pageCeasar> {
                           ),
                           ElevatedButton(
                             onPressed: _runCode,
-                            child: const Text('提交'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,
                               iconColor: Colors.white,
                             ),
+                            child: const Text('提交'),
                           ),
                           const SizedBox(height: 10),
                           Expanded(
@@ -155,7 +155,7 @@ class _NewPageState extends State<pageCeasar> {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: pageCeasar(),
   ));
 }

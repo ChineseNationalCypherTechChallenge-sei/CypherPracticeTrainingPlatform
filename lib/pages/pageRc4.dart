@@ -68,37 +68,37 @@ class _NewPageState extends State<pageRc4> {
                       ),
                     ),
                     SizedBox(height: 10),
-                    const Text(
+                    Text(
                       'RC4 是一种流加密算法，广泛应用于各种加密协议。其主要加密过程如下：',
                       style: TextStyle(fontSize: 16),
                     ),
-                    const SizedBox(height: 10),
-                    const Text(
+                    SizedBox(height: 10),
+                    Text(
                       '初始化 S-box：\n'
                       '  生成一个长度为 256 的 S-box，其中每个元素的值为 0 到 255。即 S[i] = i。\n'
                       '  使用密钥对 S-box 进行初步打乱。通过遍历 S-box，将其与密钥的各个字节进行混合。',
                       style: TextStyle(fontSize: 16),
                     ),
-                    const SizedBox(height: 10),
-                    const Text(
+                    SizedBox(height: 10),
+                    Text(
                       '生成密钥流：\n'
                       '  继续通过对 S-box 的打乱生成伪随机字节流。\n'
                       '  在每一步中，生成一个新的字节，作为伪随机密钥流中的一个字节。',
                       style: TextStyle(fontSize: 16),
                     ),
-                    const SizedBox(height: 10),
-                    const Text(
+                    SizedBox(height: 10),
+                    Text(
                       '加密过程：\n'
                       '  将生成的密钥流字节与明文中的每一个字节进行异或，得到加密后的密文。',
                       style: TextStyle(fontSize: 16),
                     ),
-                    const SizedBox(height: 20),
-                    const Text(
+                    SizedBox(height: 20),
+                    Text(
                       '还原并输出Rc4加密的如下字符串：',
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    const Text(
+                    Text(
                       '密文: [45, 139, 35, 110, 21]\n'
                       '密钥: [101, 202, 111, 34, 90]\n',
                       style: TextStyle(fontSize: 16),
@@ -147,11 +147,11 @@ class _NewPageState extends State<pageRc4> {
                           ),
                           ElevatedButton(
                             onPressed: _runCode,
-                            child: const Text('提交'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,
                               iconColor: Colors.white,
                             ),
+                            child: const Text('提交'),
                           ),
                           const SizedBox(height: 10),
                           Expanded(
@@ -177,7 +177,7 @@ class _NewPageState extends State<pageRc4> {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: pageRc4(),
   ));
 }

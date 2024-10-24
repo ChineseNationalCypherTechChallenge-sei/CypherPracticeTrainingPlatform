@@ -4,11 +4,11 @@ import 'package:cypherpracticetrainingplatform/pages/pageCeasar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const CypherPracticeTrainingPlatform());
+  runApp(const cypherpracticetrainingplatform());
 }
 
-class CypherPracticeTrainingPlatform extends StatelessWidget {
-  const CypherPracticeTrainingPlatform({super.key});
+class cypherpracticetrainingplatform extends StatelessWidget {
+  const cypherpracticetrainingplatform({super.key});
 
   @override
   Widget build(BuildContext context) {

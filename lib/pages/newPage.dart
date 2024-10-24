@@ -153,11 +153,11 @@ class _NewPageState extends State<NewPage> {
                           ),
                           ElevatedButton(
                             onPressed: _runCode,
-                            child: const Text('提交'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,
                               iconColor: Colors.white,
                             ),
+                            child: const Text('提交'),
                           ),
                           const SizedBox(height: 10),
                           Expanded(
